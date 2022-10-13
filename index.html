@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<meta author="Cristiane Del Valle Lima Kolberg">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="Target Shooting - Mosca."/>
+	    	 	<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" href="style.css">
+	    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+		<link rel="shortcut icon" href="alvo.png">
+		<title>Target Shooting</title>
+        <style type="text/css">body{cursor:url(../MOSCA/arco-flecha.cur), default}</style>
+	<body>		
+		<center>
+			    
+                <div class="stage">
+			   	<!--<marquee  behavior="alternate" direction="left">          
+		         	<img class="mosca" src="desafio6.mosca.png" alt="mosca"> 
+		    	</marquee> -->
+			   	<!--<marquee  behavior="scroll" direction="down">-->        
+	          		<img class="mosca2 bounce" src="mosca.png" alt="mosca"> 
+	    		<!--</marquee>--> 
+	    	</div>
+
+		    <div id="canvas"><canvas width="1250" height="475"></canvas></div>
+
+			<div class="stage">
+	 
+			    <!--<marquee  behavior="scroll" direction="right">         
+		          	<img class="mosca mosca" src= "desafio6.mosca.png" alt="mosca"> 
+		    	</marquee>-->
+	    	</div>			    
+		</center>
+
+		<footer>		
+			<div class="contato">
+		        <a href="https://www.linkedin.com/in/cristiane-del-valle-kolberg-05219344/"><img src="linkedin-bco.png" alt="Logo do LinkedIn" class="linkedin"></a>
+		        <a href="https://github.com/Cristiane-DVLK/Decodificador-de-Texto.git"><img src="github-bco.png" alt="Logo do GitHub" class="github"></a>
+		    </div>
+			<p id="rodape1" class="copyright">&copy; <em>Copyright</em> Desenvolvido por <strong>Cristiane Del Valle Lima Kolberg</strong></p>
+			<!--<p id="rodape2" class="projdesenvolvido">Desenvolvido como Challenge no Programa <strong>ONE Oracle Next Education</strong> e <strong>Alura</strong>.</p>-->
+					   	<marquee  behavior="alternate" direction="left">         
+			        <img class="mosca" src= "mosca.png" alt="mosca"> 
+			    </marquee> 
+		</footer>
+	<body>
+<html>
+
+
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'goldenrod';
+    pincel.fillRect(0, 0, 1250, 475);
+
+    var raio = 10;
+    var xAleatorio;
+    var yAleatorio;
+
+    function desenhaCirculo(x, y, raio, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+
+   }
+
+    function limpaTela() {
+    pincel.clearRect(0, 0, 1250, 475);
+
+    }
+
+    function desenhaAlvo(x,y) {
+
+       	desenhaCirculo(x, y, raio+40, 'darkorange');
+        desenhaCirculo(x, y, raio+30, 'white');
+        desenhaCirculo(x, y, raio+20, 'darkorange');
+        desenhaCirculo(x, y, raio+10, 'white');
+        desenhaCirculo(x, y, raio, 'black');
+        desenhaCirculo(x, y, raio-8, 'grey');         
+
+    }
+
+    function sorteiaPosicao(maximo) {
+
+        return Math.floor(Math.random() * maximo);
+
+    }
+
+
+    function sorteiaPosicao(maximo) {
+
+        return Math.floor(Math.random() * maximo);
+
+    }
+
+
+function atualizaTela() {
+    limpaTela();
+    xAleatorio = sorteiaPosicao(1250);
+    yAleatorio = sorteiaPosicao(475);
+    desenhaAlvo(xAleatorio, yAleatorio);
+}
+
+setInterval(atualizaTela, 900);
+
+function dispara(evento) {
+
+    var x = evento.pageX - tela.offsetLeft;
+    var y = evento.pageY - tela.offsetTop;
+
+    if((x > xAleatorio - raio)
+    && (x < xAleatorio + raio)
+    && (y > yAleatorio - raio)
+    && (y < yAleatorio + raio)) {
+
+        alert('Na mosca! Ooops... no alvo!!');
+
+    }
+}
+
+tela.onclick = dispara;
+
+
+</script>
+
